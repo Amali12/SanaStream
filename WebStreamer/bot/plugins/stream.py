@@ -1,6 +1,3 @@
-# This file is a part of TG-FileStreamBot
-# Coding : Jyothis Jayanth [@EverythingSuckz]
-
 import logging
 from pyrogram import filters, errors
 from WebStreamer.vars import Var
@@ -9,7 +6,6 @@ from WebStreamer.bot import StreamBot, logger
 from WebStreamer.utils import get_hash, get_name
 from pyrogram.enums.parse_mode import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-
 
 @StreamBot.on_message(
     filters.private
@@ -27,18 +23,19 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 )
 async def media_receive_handler(_, m: Message):
     if Var.ALLOWED_USERS and not ((str(m.from_user.id) in Var.ALLOWED_USERS) or (m.from_user.username in Var.ALLOWED_USERS)):
-        return await m.reply("Sorry you are not <b>allowed to use</b> this bot.", quote=True)
+        return await m.reply("Sorry, you are not allowed to use this bot.", quote=True)
+
     log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
     file_hash = get_hash(log_msg, Var.HASH_LENGTH)
     stream_link = f"{Var.URL}{log_msg.id}/{quote_plus(get_name(m))}?hash={file_hash}"
     short_link = f"{Var.URL}{file_hash}{log_msg.id}"
     logger.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
+
     try:
-        await m.reply_text(
-            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
-                short_link, stream_link
-            ),
-            quote=True,
+        caption = f"<b>⚡Short Url:</b> <code>{short_link}</code>\n\n<b>⚡Long Url:</b> <code>{stream_link}</code>"
+        await m.reply_document(
+            document=log_msg.document.file_id,
+            caption=caption,
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("Open Link", url=short_link)]]
