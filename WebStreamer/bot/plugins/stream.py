@@ -33,9 +33,19 @@ async def media_receive_handler(_, m: Message):
 
     try:
         caption = f"<b>⚡Short Url:</b> <code>{short_link}</code>\n\n<b>⚡Long Url:</b> <code>{stream_link}</code>"
-        await m.reply_document(
-            document=log_msg.document.file_id,
+        await log_msg.edit_caption(
             caption=caption,
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("Open Link", url=short_link)]]
+            ),
+        )
+        
+        await m.reply_text(
+            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
+                short_link, stream_link
+            ),
+            quote=True,
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("Open Link", url=short_link)]]
