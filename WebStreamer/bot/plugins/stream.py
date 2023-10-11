@@ -34,14 +34,8 @@ async def media_receive_handler(_, m: Message):
     short_link = f"{Var.URL}{file_hash}{log_msg.id}"
     logger.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
     try:
-        await log_msg.reply_text(
-            text=f"<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
-                short_link, stream_link
-            ),
-            quote=True,
-            parse_mode=ParseMode.MARKDOWN
         await m.reply_text(
-            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
+            text="Short Url: <code>{}</code>\n\n Long Url: <code>{}</code>".format(
                 short_link, stream_link
             ),
             quote=True,
@@ -52,7 +46,7 @@ async def media_receive_handler(_, m: Message):
         )
     except errors.ButtonUrlInvalid:
         await m.reply_text(
-            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
+            text="Short Url: <code>{}</code>\n\n Long Url: <code>{}</code>".format(
                 short_link, stream_link
             ),
             quote=True,
