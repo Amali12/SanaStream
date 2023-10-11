@@ -28,19 +28,14 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 async def media_receive_handler(_, m: Message):
     if Var.ALLOWED_USERS and not ((str(m.from_user.id) in Var.ALLOWED_USERS) or (m.from_user.username in Var.ALLOWED_USERS)):
         return await m.reply("Sorry you are not <b>allowed to use</b> this bot.", quote=True)
-    log_msg = await m.forward(
-      		chat_id=Var.BIN_CHANNEL,
-      		text="Short Url: <code>{}</code>\n\n Long Url: <code>{}</code>".format(
-                short_link, stream_link
-            ),
-                             )
+    log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
     file_hash = get_hash(log_msg, Var.HASH_LENGTH)
     stream_link = f"{Var.URL}{log_msg.id}/{quote_plus(get_name(m))}?hash={file_hash}"
     short_link = f"{Var.URL}{file_hash}{log_msg.id}"
     logger.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
     try:
         await m.reply_text(
-            text="Short Url: <code>{}</code>\n\n Long Url: <code>{}</code>".format(
+            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
                 short_link, stream_link
             ),
             quote=True,
@@ -51,7 +46,7 @@ async def media_receive_handler(_, m: Message):
         )
     except errors.ButtonUrlInvalid:
         await m.reply_text(
-            text="Short Url: <code>{}</code>\n\n Long Url: <code>{}</code>".format(
+            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
                 short_link, stream_link
             ),
             quote=True,
