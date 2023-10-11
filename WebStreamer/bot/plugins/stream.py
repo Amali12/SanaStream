@@ -40,6 +40,7 @@ async def media_receive_handler(_, m: Message):
             ),
             quote=True,
             parse_mode=ParseMode.MARKDOWN
+        )
         await m.reply_text(
             text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
                 short_link, stream_link
