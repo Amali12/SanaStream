@@ -38,7 +38,7 @@ async def media_receive_handler(_, m: Message):
         await log_msg.reply_text(
             text=f"<b>⚡Short Url:</b> <a href="{short_link}">{short_link}</a>\n\n <b>⚡Long Url:</b> <a href="{short_link}">{stream_link}</a>",
             quote=True,
-            parse_mode=ParseMode.HTML
+            parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("⚡ Open Link ⚡", url=short_link)]]
             ),
