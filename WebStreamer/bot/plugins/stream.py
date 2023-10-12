@@ -36,7 +36,9 @@ async def media_receive_handler(_, m: Message):
     logger.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
     try:
         await log_msg.reply_text(
-            text=f"<b>⚡Short Url:</b> <code>{short_link}</code>\n\n <b>⚡Long Url:</b> <code>{stream_link}</code>",
+            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
+                short_link, stream_link
+            ),
             quote=True,
             parse_mode=ParseMode.HTML
         )
