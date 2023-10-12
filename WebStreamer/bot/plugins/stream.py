@@ -49,7 +49,7 @@ async def media_receive_handler(_, m: Message):
         parse_mode=ParseMode.HTML,
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("⚡ Open Link ⚡", url=short_link)]]
-        )
+        ),
     )
 except errors.ButtonUrlInvalid:
     await m.reply_text(
