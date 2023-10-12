@@ -2,7 +2,7 @@
 # Coding : Jyothis Jayanth [@EverythingSuckz]
 
 import logging
-from pyrogram import filters, errors
+from pyrogram import filters, errors, Client
 from WebStreamer.vars import Var
 from urllib.parse import quote_plus
 from WebStreamer.bot import StreamBot, logger
