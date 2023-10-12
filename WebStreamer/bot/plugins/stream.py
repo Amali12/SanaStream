@@ -35,25 +35,25 @@ async def media_receive_handler(_, m: Message):
     short_link = f"{Var.URL}{file_hash}{log_msg.id}"
     logger.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
     try:
-        await log_msg.reply_text(
-            text=f"<b>⚡Short Url:</b> <a href='{short_link}'>{short_link}</a>\n\n <b>⚡Long Url:</b> <a href='{stream_link}'>{stream_link}</a>",
-            quote=True,
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("⚡ Open Link ⚡", url=short_link)]]
-            ),
-        )
+    await log_msg.reply_text(
+        text=f"<b>⚡Short Url:</b> <a href='{short_link}'>{short_link}</a>\n\n <b>⚡Long Url:</b> <a href='{stream_link}'>{stream_link}</a>",
+        quote=True,
+        parse_mode=ParseMode.HTML,
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("⚡ Open Link ⚡", url=short_link)]]
+        ),
+    )
     await m.reply_text(
-            text=f"<b>⚡Short Url:</b> <a href='{short_link}'>{short_link}</a>\n\n <b>⚡Long Url:</b> <a href='{stream_link}'>{stream_link}</a>",
-            quote=True,
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("⚡ Open Link ⚡", url=short_link)]]
-            ),
+        text=f"<b>⚡Short Url:</b> <a href='{short_link}'>{short_link}</a>\n\n <b>⚡Long Url:</b> <a href='{stream_link}'>{stream_link}</a>",
+        quote=True,
+        parse_mode=ParseMode.HTML,
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("⚡ Open Link ⚡", url=short_link)]]
         )
-    except errors.ButtonUrlInvalid:
-        await m.reply_text(
-            text=f"<b>⚡Short Url:</b> <a href='{short_link}'>{short_link}</a>\n\n <b>⚡Long Url:</b> <a href='{stream_link}'>{stream_link}</a>",
-            quote=True,
-            parse_mode=ParseMode.HTML,
-        )
+    )
+except errors.ButtonUrlInvalid:
+    await m.reply_text(
+        text=f"<b>⚡Short Url:</b> <a href='{short_link}'>{short_link}</a>\n\n <b>⚡Long Url:</b> <a href='{stream_link}'>{stream_link}</a>",
+        quote=True,
+        parse_mode=ParseMode.HTML
+    )
