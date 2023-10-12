@@ -36,23 +36,26 @@ async def media_receive_handler(_, m: Message):
     logger.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
     try:
         await log_msg.reply_text(
-            text=f"<b>⚡Short Url:</b> <code>{short_link}</code>\n\n <b>⚡Long Url:</b> <code>{stream_link}</code>",
+            text=f"<b>⚡Short Url:</b> <a href="{short_link}">{short_link}</a>\n\n <b>⚡Long Url:</b> <a href="{short_link}">{stream_link}</a>",
             quote=True,
-            parse_mode=ParseMode.MARKDOWN
+            parse_mode=ParseMode.HTML
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("⚡ Open Link ⚡", url=short_link)]]
+            ),
         )
         await m.reply_text(
-            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
+            text="<b>⚡Short Url:</b> <a href="{short_link}">{short_link}</a>\n\n <b>⚡Long Url:</b> <a href="{short_link}">{stream_link}</a>".format(
                 short_link, stream_link
             ),
             quote=True,
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("Open Link", url=short_link)]]
+                [[InlineKeyboardButton("⚡ Open Link ⚡", url=short_link)]]
             ),
         )
     except errors.ButtonUrlInvalid:
         await m.reply_text(
-            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
+            text="<b>⚡Short Url:</b> <a href="{short_link}">{short_link}</a>\n\n <b>⚡Long Url:</b> <a href="{short_link}">{stream_link}</a>".format(
                 short_link, stream_link
             ),
             quote=True,
