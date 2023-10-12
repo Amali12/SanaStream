@@ -41,7 +41,7 @@ async def media_receive_handler(_, m: Message):
             parse_mode=ParseMode.MARKDOWN
         )
         await m.reply_text(
-            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
+            text="<b>⚡Short Url:</b>\n<code>{}</code>\n\n <b>⚡Long Url:</b>\n<code>{}</code>".format(
                 short_link, stream_link
             ),
             quote=True,
@@ -52,7 +52,7 @@ async def media_receive_handler(_, m: Message):
         )
     except errors.ButtonUrlInvalid:
         await m.reply_text(
-            text="<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
+            text="<b>⚡Short Url:</b>\n<code>{}</code>\n\n <b>⚡Long Url:</b>\n<code>{}</code>".format(
                 short_link, stream_link
             ),
             quote=True,
