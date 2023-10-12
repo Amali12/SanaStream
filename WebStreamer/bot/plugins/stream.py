@@ -2,7 +2,8 @@
 # Coding : Jyothis Jayanth [@EverythingSuckz]
 
 import logging
-from pyrogram import filters, errors, Client
+from pyrogram import Client
+from pyrogram import filters, errors
 from WebStreamer.vars import Var
 from urllib.parse import quote_plus
 from WebStreamer.bot import StreamBot, logger
@@ -35,9 +36,7 @@ async def media_receive_handler(_, m: Message):
     logger.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
     try:
         await log_msg.reply_text(
-            text=f"<b>⚡Short Url:</b> <code>{}</code>\n\n <b>⚡Long Url:</b> <code>{}</code>".format(
-                short_link, stream_link
-            ),
+            text=f"<b>⚡Short Url:</b> <code>{short_link}</code>\n\n <b>⚡Long Url:</b> <code>{stream_link}</code>",
             quote=True,
             parse_mode=ParseMode.MARKDOWN
         )
